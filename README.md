@@ -1,5 +1,7 @@
 # nodejs-streams
 
+A sample application just to transfer request to a dedicated host
+
 Open a terminal and run node index.js.
 
 
