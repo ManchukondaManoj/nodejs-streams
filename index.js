@@ -6,15 +6,16 @@ const server = net.createServer((c) => {
   });
 });
 server.on('connection', (connection) => {
-  connection.on('data', (chunk) => {
-    const proxyToServer = net.createConnection({
+  const proxyToServer = net.createConnection({
       host: 'localhost',
       port: '3030'
-    });
-
-    proxyToServer.write(chunk);
+  });
+  connection.pipe(proxyToServer);
+  
+  connection.on('data', (chunk) => {
+    //proxyToServer.write(chunk);
     
-    connection.pipe(proxyToServer);
+   
     proxyToServer.pipe(connection);
 
     connection.on('error', (err) => {
